@@ -51,6 +51,7 @@ from esphome import codegen as cg
         "std_ns",
         "std_string",
         "std_vector",
+        "std_span",
         "uint8",
         "uint16",
         "uint32",
