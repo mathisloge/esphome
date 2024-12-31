@@ -2,7 +2,7 @@
 
 #include <cstddef>
 #include <cstdint>
-#include <vector>
+#include <span>
 
 #ifdef USE_ESP32
 #include <freertos/FreeRTOS.h>
@@ -47,7 +47,7 @@ class Speaker {
   /// @return The number of bytes that were actually written to the speaker's internal buffer.
   virtual size_t play(const uint8_t *data, size_t length) = 0;
 
-  size_t play(const std::vector<uint8_t> &data) { return this->play(data.data(), data.size()); }
+  size_t play(std::span<const uint8_t> data) { return this->play(data.data(), data.size()); }
 
   virtual void start() = 0;
   virtual void stop() = 0;

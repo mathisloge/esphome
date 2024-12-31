@@ -3,19 +3,19 @@
 #include "esphome/core/automation.h"
 #include "speaker.h"
 
-#include <vector>
+#include <span>
 
 namespace esphome {
 namespace speaker {
 
 template<typename... Ts> class PlayAction : public Action<Ts...>, public Parented<Speaker> {
  public:
-  void set_data_template(std::function<std::vector<uint8_t>(Ts...)> func) {
+  void set_data_template(std::function<std::span<uint8_t>(Ts...)> func) {
     this->data_func_ = func;
     this->static_ = false;
   }
-  void set_data_static(const std::vector<uint8_t> &data) {
-    this->data_static_ = data;
+  void set_data_static(std::vector<uint8_t> data) {
+    this->data_static_ = std::move(data);
     this->static_ = true;
   }
 
@@ -30,7 +30,7 @@ template<typename... Ts> class PlayAction : public Action<Ts...>, public Parente
 
  protected:
   bool static_{false};
-  std::function<std::vector<uint8_t>(Ts...)> data_func_{};
+  std::function<std::span<uint8_t>(Ts...)> data_func_{};
   std::vector<uint8_t> data_static_{};
 };
 
