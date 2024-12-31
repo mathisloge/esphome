@@ -10,7 +10,7 @@ namespace speaker {
 
 template<typename... Ts> class PlayAction : public Action<Ts...>, public Parented<Speaker> {
  public:
-  void set_data_template(std::function<std::span<uint8_t>(Ts...)> func) {
+  void set_data_template(std::function<std::span<const uint8_t>(Ts...)> func) {
     this->data_func_ = func;
     this->static_ = false;
   }
@@ -30,7 +30,7 @@ template<typename... Ts> class PlayAction : public Action<Ts...>, public Parente
 
  protected:
   bool static_{false};
-  std::function<std::span<uint8_t>(Ts...)> data_func_{};
+  std::function<std::span<const uint8_t>(Ts...)> data_func_{};
   std::vector<uint8_t> data_static_{};
 };
 
