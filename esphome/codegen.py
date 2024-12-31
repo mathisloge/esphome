@@ -87,6 +87,7 @@ from esphome.cpp_types import (  # noqa: F401
     std_vector,
     std_span,
     uint8,
+    const_uint8,
     uint16,
     uint32,
     uint64,

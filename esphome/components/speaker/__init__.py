@@ -86,7 +86,7 @@ async def speaker_play_action(config, action_id, template_arg, args):
     data = config[CONF_DATA]
 
     if cg.is_template(data):
-        templ = await cg.templatable(data, args, cg.std_span.template())
+        templ = await cg.templatable(data, args, cg.std_span.template(cg.const_uint8))
         cg.add(var.set_data_template(templ))
     else:
         cg.add(var.set_data_static(data))
